@@ -2,10 +2,9 @@
 // Licensed under the MIT License.
 // See LICENSE in the project root for license information.
 
-using BasicAuthorizationSample;
 using Microsoft.AspNetCore.Authentication;
 
-namespace BasicAuthenticationSample;
+namespace BasicAuthentication;
 
 public static class BasicAuthenticationExtensions
 {

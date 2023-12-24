@@ -14,7 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace BasicAuthorizationSample;
+namespace BasicAuthentication;
 
 public sealed class BasicAuthenticationHandler(
   IOptionsMonitor<BasicAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
@@ -30,7 +30,7 @@ public sealed class BasicAuthenticationHandler(
       return AuthenticateResult.NoResult();
     }
 
-    if (AuthenticationHeaderValue.TryParse(authorizationHeader, out AuthenticationHeaderValue? authenticationHeaderValue) ||
+    if (!AuthenticationHeaderValue.TryParse(authorizationHeader, out AuthenticationHeaderValue? authenticationHeaderValue) ||
       authenticationHeaderValue is null)
     {
       Logger.LogWarning("No authentication header value.");
@@ -105,6 +105,13 @@ public sealed class BasicAuthenticationHandler(
     {
       Logger.LogError(ex, "Error occured while trying retreive basic authenticastion credentials.");
       return false;
+    }
+    finally
+    {
+      if (pooledArray is not null)
+      {
+        ArrayPool<byte>.Shared.Return(pooledArray);
+      }
     }
 
     int separatorIndex = usernameAndPassword.IndexOf(':');
