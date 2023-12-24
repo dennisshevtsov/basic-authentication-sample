@@ -106,6 +106,13 @@ public sealed class BasicAuthenticationHandler(
       Logger.LogError(ex, "Error occured while trying retreive basic authenticastion credentials.");
       return false;
     }
+    finally
+    {
+      if (pooledArray is not null)
+      {
+        ArrayPool<byte>.Shared.Return(pooledArray);
+      }
+    }
 
     int separatorIndex = usernameAndPassword.IndexOf(':');
 
