@@ -14,7 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace BasicAuthorizationSample;
+namespace BasicAuthentication;
 
 public sealed class BasicAuthenticationHandler(
   IOptionsMonitor<BasicAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)

@@ -5,7 +5,7 @@
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 
-namespace BasicAuthorizationSample;
+namespace BasicAuthentication;
 
 public sealed class BasicAuthenticationOptions : AuthenticationSchemeOptions
 {
