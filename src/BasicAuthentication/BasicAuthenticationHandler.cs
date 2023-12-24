@@ -30,7 +30,7 @@ public sealed class BasicAuthenticationHandler(
       return AuthenticateResult.NoResult();
     }
 
-    if (AuthenticationHeaderValue.TryParse(authorizationHeader, out AuthenticationHeaderValue? authenticationHeaderValue) ||
+    if (!AuthenticationHeaderValue.TryParse(authorizationHeader, out AuthenticationHeaderValue? authenticationHeaderValue) ||
       authenticationHeaderValue is null)
     {
       Logger.LogWarning("No authentication header value.");
